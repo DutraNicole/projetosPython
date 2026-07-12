@@ -19,49 +19,93 @@ def main(page: ft.page):
         
         )
     
+    number_style = {
+        "height": 60,
+        "bgcolor": "#4d4d4d",
+        "color": "white",
+        "expand": 1,
+        }
+    
+    operator_style = {
+        "height": 60,
+        "bgcolor": "#FF9500",
+        "color": "white",
+        "expand": 1,
+        }
+    
+    clear_style = {
+        "height": 60,
+        "bgcolor": "#FF3B30",
+        "color": "white",
+        "expand": 1,
+        }
+    
+    igual_style = {
+        "height": 60,
+        "bgcolor": "#34C759",
+        "color": "white",
+        "expand": 1,
+        }
+    
     button_grids = [
             [
-                    ("C"),
-                    ("%"),
-                    ("/"),
-                    ("*"),
+                    ("C", clear_style),
+                    ("%", operator_style),
+                    ("/", operator_style),
+                    ("*", operator_style),
             ],
             [
-                    ("7"),
-                    ("8"),
-                    ("9"),
-                    ("-"),
+                    ("7", number_style),
+                    ("8", number_style),
+                    ("9", number_style),
+                    ("-", operator_style),
             ],
             [
-                    ("4"),
-                    ("5"),
-                    ("6"),
-                    ("+"),
+                    ("4", number_style),
+                    ("5", number_style),
+                    ("6", number_style),
+                    ("+", operator_style),
             ],
             [
-                    ("1"),
-                    ("2"),
-                    ("3"),
-                    ("="),
+                    ("1", number_style),
+                    ("2", number_style),
+                    ("3", number_style),
+                    ("=", igual_style),
             ],
             [
-                    ("0"),
-                    ("."),
-                    ("x"),
+                    ("0", {**number_style, "expand": 2}),
+                    (".", number_style),
+                    ("x", operator_style),
             ]
         ]
     
-        button = []
-        for row in button_grid:
-            row_controls = []
+    #houve um erro na parte de fazer os botoes
+    buttons = []
+    for row in button_grids:
+        row_controls = []
+        for text, style in row:
+            #aqui houve uma mudança na programação pela versão da IDE ser antiga
+            btn = ft.Button(
+                content=ft.Text(text),
+                **style,
+                style=ft.ButtonStyle(
+                    shape=ft.RoundedRectangleBorder(radius=5),
+                    padding=0
+                )
+            )
+            row_controls.append(btn)
+
+        buttons.append(ft.Row(row_controls, spacing=5))
     
+
     page.add(
         
         ft.Column(
             [
                     display,
-                
+                    ft.Column(buttons, spacing=5)
             ],
+            spacing=15
             )
         )
     
