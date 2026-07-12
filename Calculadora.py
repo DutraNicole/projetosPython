@@ -1,5 +1,5 @@
 import flet as ft
-#calculadora simples utilizando flet
+
 def main(page: ft.Page):
     page.title = "Calculadora"
     page.bgcolor = "#2d2d2d"
@@ -17,21 +17,18 @@ def main(page: ft.Page):
     )
 
     def entering_valores(e):
-        #entra com os valores dos numeros que são digitados
         nonlocal all_valores
         all_valores += e.control.content.value
         resultado_text.value = all_valores
         page.update()
 
     def limpar_tela(e):
-        #limpa a tela pra fazer uma nova conta
         nonlocal all_valores
         all_valores = ""
         resultado_text.value = "0"
         page.update()
         
     def apagar_ultimo(e):
-        #apaga o ultimo valor digitado (se o usuario precisar apagar)
         nonlocal all_valores
         all_valores = all_valores[:-1]
         if all_valores == "":
@@ -41,10 +38,9 @@ def main(page: ft.Page):
         page.update()
         
     def calcular(e):
-        #faz todos os calculos: +, -, \, *
         nonlocal all_valores
         try:
-                expressao = all_valores.replace("%", "/100") #foi usado, pois o "eval", não lê operadoes diferentes 
+                expressao = all_valores.replace("%", "/100")
                 resultado_text.value = str(eval(expressao))
                 all_valores =  resultado_text.value
         except:
@@ -53,7 +49,6 @@ def main(page: ft.Page):
         page.update()
 
     display = ft.Container(
-        #referente ao display que mostra os numeros
         content=resultado_text,
         bgcolor="#37474F",
         padding=10,
@@ -63,7 +58,6 @@ def main(page: ft.Page):
     )
 
     numero_style = {
-        #referente aos numeros que estão sendo mostrados no display
         "height": 60,
         "bgcolor": "#4d4d4d",
         "color": "white",
@@ -71,7 +65,6 @@ def main(page: ft.Page):
     }
 
     operador_style = {
-        #referente aos operadores da calculadora
         "height": 60,
         "bgcolor": "#FF9500",
         "color": "white",
@@ -79,7 +72,6 @@ def main(page: ft.Page):
     }
 
     limpar_style = {
-        #referente ao botão limpar
         "height": 60,
         "bgcolor": "#FF3B30",
         "color": "white",
@@ -87,13 +79,12 @@ def main(page: ft.Page):
     }
 
     igual_style = {
-        #referente ao botao igual
         "height": 60,
         "bgcolor": "#34C759",
         "color": "white",
         "expand": 1,
     }
-    #referente ao funcionamento adequado de cada botão
+
     button_grids = [
         [
             ("C", limpar_style, limpar_tela),
