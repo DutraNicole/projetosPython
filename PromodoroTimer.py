@@ -17,7 +17,7 @@ class PromodoroTimer:
         self.root.title("Temporizador Pomodoro")
 
         # Fundo da janela
-        self.root.configure(bg="#00AAFF")
+        self.root.configure(bg="#CCFFFF")
 
         # Caixa do relógio
         timer_box = tk.Frame(
